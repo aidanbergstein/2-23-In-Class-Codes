@@ -1,0 +1,302 @@
+> head(iris)
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa
+> summary(iris)
+  Sepal.Length    Sepal.Width     Petal.Length    Petal.Width          Species  
+ Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100   setosa    :50  
+ 1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300   versicolor:50  
+ Median :5.800   Median :3.000   Median :4.350   Median :1.300   virginica :50  
+ Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199                  
+ 3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800                  
+ Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500                  
+> library(tidyverse)
+> library(reshape2)
+Error in library(reshape2) : there is no package called ‘reshape2’
+> install.packages("reshape2")
+trying URL 'https://cran.rstudio.com/bin/macosx/contrib/4.1/reshape2_1.4.4.tgz'
+Content type 'application/x-gzip' length 331915 bytes (324 KB)
+==================================================
+downloaded 324 KB
+
+
+The downloaded binary packages are in
+	/var/folders/3d/m7c38rw9693533gmvnfh8mpw0000gn/T//RtmpVPf9DY/downloaded_packages
+> library(reshape2)
+
+Attaching package: ‘reshape2’
+
+The following object is masked from ‘package:tidyr’:
+
+    smiths
+
+> mean.iris <-
++     iris %>% 
++     group_by(Species) %>% 
++     summarise_all("mean") %>% 
++     melt()
+Using Species as id variables
+> coord_radar <- function (theta = "x", start = 0, direction = 1) 
++ {
++     theta <- match.arg(theta, c("x", "y"))
++     r <- if (theta == "x") 
++         "y"
++     else "x"
++     ggproto("CordRadar", CoordPolar, theta = theta, r = r, start = start, 
++             direction = sign(direction),
++             is_linear = function(coord) TRUE)
++ }
+> View(coord_radar)
+> ggplot(mean.iris, aes(x = variable, y = value)) +
++     geom_polygon(aes(group = Species, color = Species), fill = NA, size = 2) +
++     geom_line(aes(group = Species, color = Species), size = 2) +
++     facet_wrap(~ Species) +
++     theme(strip.text.x = element_text(size = rel(0.8)),
++           axis.text.x = element_text(size = rel(0.8)),
++           axis.ticks.y = element_blank(),
++           axis.text.y = element_blank()) +
++     xlab("") + ylab("") +
++     guides(color = "none") +
++     coord_radar()
+> coord_radar <- function (theta = "x", start = 0, direction = 1) 
++ View(coord_radar)
+> theta <- match.arg(theta, c("x", "y"))
+Error in match.arg(theta, c("x", "y")) : object 'theta' not found
+> r <- if (theta == "x") 
++     "y"
+Error: object 'theta' not found
+> else "x"
+Error: unexpected 'else' in "else"
+> ggproto("CordRadar", CoordPolar, theta = theta, r = r, start = start, 
++         direction = sign(direction),
++         is_linear = function(coord) TRUE)
+Error in ggproto("CordRadar", CoordPolar, theta = theta, r = r, start = start,  : 
+  object 'theta' not found
+> ggplot(mean.iris, aes(x = variable, y = value)) +
++     geom_polygon(aes(group = Species, color = Species), fill = NA, size = 2, show.legend = FALSE) +
++     geom_line(aes(group = Species, color = Species), size = 2) +
++     theme(strip.text.x = element_text(size = rel(0.8)),
++           axis.text.x = element_text(size = rel(0.8)),
++           axis.ticks.y = element_blank(),
++           axis.text.y = element_blank()) +
++     xlab("") + ylab("") +
++     guides(color = guide_legend(ncol=2)) +
++     coord_radar()
+> coord_radar <- function (theta = "x", start = 0, direction = 1) 
++ {
++     theta <- match.arg(theta, c("x", "y"))
++     r <- if (theta == "x") 
++         "y"
++     else "x"
++     ggproto("CordRadar", CoordPolar, theta = theta, r = r, start = start, 
++             direction = sign(direction),
++             is_linear = function(coord) TRUE)
++ }
+> View(coord_radar)
+> View(coord_radar)
+> mean.iris <-
++     iris %>% 
++     group_by(Species) %>% 
++     summarise_all("mean") %>% 
++     melt()
+Using Species as id variables
+> mean.iris
+      Species     variable value
+1      setosa Sepal.Length 5.006
+2  versicolor Sepal.Length 5.936
+3   virginica Sepal.Length 6.588
+4      setosa  Sepal.Width 3.428
+5  versicolor  Sepal.Width 2.770
+6   virginica  Sepal.Width 2.974
+7      setosa Petal.Length 1.462
+8  versicolor Petal.Length 4.260
+9   virginica Petal.Length 5.552
+10     setosa  Petal.Width 0.246
+11 versicolor  Petal.Width 1.326
+12  virginica  Petal.Width 2.026
+> View(coord_radar)
+> ggplot(mean.iris, aes(x = variable, y = value)) +
++     geom_polygon(aes(group = Species, color = Species), fill = NA, size = 2) +
++     geom_line(aes(group = Species, color = Species), size = 2) +
++     facet_wrap(~ Species) +
++     theme(strip.text.x = element_text(size = rel(0.8)),
++           axis.text.x = element_text(size = rel(0.8)),
++           axis.ticks.y = element_blank(),
++           axis.text.y = element_blank()) +
++     xlab("") + ylab("") +
++     guides(color = "none") +
++     coord_radar()
+> summary.iris
+Error: object 'summary.iris' not found
+> summary()
+Error in is.factor(object) : 
+  argument "object" is missing, with no default
+> summary(iris)
+  Sepal.Length    Sepal.Width     Petal.Length    Petal.Width          Species  
+ Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100   setosa    :50  
+ 1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300   versicolor:50  
+ Median :5.800   Median :3.000   Median :4.350   Median :1.300   virginica :50  
+ Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199                  
+ 3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800                  
+ Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500                  
+> mean(iris)
+[1] NA
+Warning message:
+In mean.default(iris) : argument is not numeric or logical: returning NA
+> head.fbi
+Error: object 'head.fbi' not found
+> summary(fbi)
+    State               Abb                 Year        Population      
+ Length:23672       Length:23672       Min.   :1961   Min.   :  234000  
+ Class :character   Class :character   1st Qu.:1975   1st Qu.: 1240663  
+ Mode  :character   Mode  :character   Median :1990   Median : 3289000  
+                                       Mean   :1990   Mean   : 4931703  
+                                       3rd Qu.:2004   3rd Qu.: 5842713  
+                                       Max.   :2018   Max.   :39557045  
+                                                                        
+                                   Type          Count        Violent.crime  
+ Aggravated.assault                  :2959   Min.   :     1   Mode :logical  
+ Burglary                            :2959   1st Qu.:   772   FALSE:8877     
+ Larceny.theft                       :2959   Median :  4906   TRUE :14795    
+ Legacy.rape                         :2959   Mean   : 29342                  
+ Motor.vehicle.theft                 :2959   3rd Qu.: 23892                  
+ Murder.and.nonnegligent.Manslaughter:2959   Max.   :986120                  
+ (Other)                             :5918   NA's   :2751                    
+> ggplot(mean.fbi, aes(x = variable, y = value)) +
++     geom_polygon(aes(group = State, color = State), fill = NA, size = 2) +
++     geom_line(aes(group = State, color = State), size = 2) +
++     facet_wrap(~ State) +
++     theme(strip.text.x = element_text(size = rel(0.8)),
++           axis.text.x = element_text(size = rel(0.8)),
++           axis.ticks.y = element_blank(),
++           axis.text.y = element_blank()) +
++     xlab("") + ylab("") +
++     guides(color = "none") +
++     coord_radar()
+Error in ggplot(mean.fbi, aes(x = variable, y = value)) : 
+  object 'mean.fbi' not found
+> mean.fbi <-
++     iris %>% 
++     group_by(State) %>% 
++     summarise_all("mean") %>% 
++     melt()
+Error: Must group by variables found in `.data`.
+* Column `State` is not found.
+Run `rlang::last_error()` to see where the error occurred.
+> mean.fbi <-
++     fbi %>% 
++     group_by(State) %>% 
++     summarise_all("mean") %>% 
++     melt()
+Using State as id variables
+There were 50 or more warnings (use warnings() to see the first 50)
+> mean.fbi <-
++     fbi %>% 
++     group_by(Year) %>% 
++     summarise_all("mean") %>% 
++     melt()
+No id variables; using all as measure variables
+There were 50 or more warnings (use warnings() to see the first 50)
+> ggplot(mean.fbi, aes(x = variable, y = value)) +
++     geom_polygon(aes(group = Year, color = Year), fill = NA, size = 2) +
++     geom_line(aes(group = Year, color = Year), size = 2) +
++     facet_wrap(~ Year) +
++     theme(strip.text.x = element_text(size = rel(0.8)),
++           axis.text.x = element_text(size = rel(0.8)),
++           axis.ticks.y = element_blank(),
++           axis.text.y = element_blank()) +
++     xlab("") + ylab("") +
++     guides(color = "none") +
++     coord_radar()
+Error: At least one layer must contain all faceting variables: `Year`.
+* Plot is missing `Year`
+* Layer 1 is missing `Year`
+* Layer 2 is missing `Year`
+Run `rlang::last_error()` to see where the error occurred.
+> crime.compare$count.rate = crime.compare$Count / crime.compare$Population * 10^5
+Error: object 'crime.compare' not found
+> View(crime.compare)
+Error in View : object 'crime.compare' not found
+> ggplot(data = fbi, aes(x = Year, y = Count)) + geom_point()
+Warning message:
+Removed 2751 rows containing missing values (geom_point). 
+> filter(fbi, Year>=2019, State=="Iowa")
+[1] State         Abb           Year          Population    Type          Count        
+[7] Violent.crime
+<0 rows> (or 0-length row.names)
+> ggplot(data = filter(fbi, Type=="Murder.and.nonnegligent.Manslaughter"), 
++        aes(x = Year, y = Count)) + geom_point()
+> fbi %>% 
++     filter(Type=="Murder.and.nonnegligent.Manslaughter") %>%
++     ggplot(aes(x = Year, y = Count)) + 
++     geom_point()
+> library(classdata)
+> library(dplyr)
+> fbi %>% filter(Type=="Burglary", Year==2014) %>% head()
+       State Abb Year Population     Type  Count Violent.crime
+1    Alabama  AL 2014    4849377 Burglary  39715         FALSE
+2     Alaska  AK 2014     736732 Burglary   3150         FALSE
+3    Arizona  AZ 2014    6731484 Burglary  43562         FALSE
+4   Arkansas  AR 2014    2966369 Burglary  24790         FALSE
+5 California  CA 2014   38802500 Burglary 202670         FALSE
+6   Colorado  CO 2014    5355866 Burglary  23472         FALSE
+> fbi %>% arrange(desc(Year), Type, desc(Count)) %>% head()
+       State Abb Year Population               Type  Count Violent.crime
+1 California  CA 2018   39557045 Aggravated.assault 105412          TRUE
+2      Texas  TX 2018   28701845 Aggravated.assault  73656          TRUE
+3    Florida  FL 2018   21299325 Aggravated.assault  55551          TRUE
+4   New York  NY 2018   19542209 Aggravated.assault  43171          TRUE
+5  Tennessee  TN 2018    6770010 Aggravated.assault  31717          TRUE
+6   Michigan  MI 2018    9995915 Aggravated.assault  31021          TRUE
+> fbi %>% arrange(desc(Year), Type, desc(Count)) %>%
++     select(Type, Count, State, Year) %>% head()
+                Type  Count      State Year
+1 Aggravated.assault 105412 California 2018
+2 Aggravated.assault  73656      Texas 2018
+3 Aggravated.assault  55551    Florida 2018
+4 Aggravated.assault  43171   New York 2018
+5 Aggravated.assault  31717  Tennessee 2018
+6 Aggravated.assault  31021   Michigan 2018
+> fbi %>% mutate(Rate = Count/Population*70000) %>% head()
+    State Abb Year Population                                 Type Count Violent.crime
+1 Alabama  AL 1961    3302000 Murder.and.nonnegligent.Manslaughter   427          TRUE
+2 Alabama  AL 1962    3358000 Murder.and.nonnegligent.Manslaughter   316          TRUE
+3 Alabama  AL 1963    3347000 Murder.and.nonnegligent.Manslaughter   340          TRUE
+4 Alabama  AL 1964    3407000 Murder.and.nonnegligent.Manslaughter   316          TRUE
+5 Alabama  AL 1965    3462000 Murder.and.nonnegligent.Manslaughter   395          TRUE
+6 Alabama  AL 1966    3517000 Murder.and.nonnegligent.Manslaughter   384          TRUE
+      Rate
+1 9.052090
+2 6.587254
+3 7.110846
+4 6.492515
+5 7.986713
+6 7.642877
+> fbi %>% 
++     summarise(mean_rate = mean(Count/Population*70000, na.rm=TRUE), 
++               sd_rate = sd(Count/Population*70000, na.rm = TRUE))
+  mean_rate sd_rate
+1  395.5483 609.999
+> fbi %>%
++     group_by(Type) %>%
++     summarise(mean_rate = mean(Count/Population*70000, na.rm=TRUE), 
++               sd_rate = sd(Count/Population*70000, na.rm = TRUE))
+# A tibble: 8 × 3
+  Type                                 mean_rate sd_rate
+  <fct>                                    <dbl>   <dbl>
+1 Aggravated.assault                      167.    112.  
+2 Burglary                                623.    312.  
+3 Larceny.theft                          1648.    626.  
+4 Legacy.rape                              20.2    10.8 
+5 Motor.vehicle.theft                     243.    157.  
+6 Murder.and.nonnegligent.Manslaughter      4.58    4.22
+7 Rape                                     30.1    12.9 
+8 Robbery                                  87.8   102.  
+> fbi %>% mutate(rate = Count / Population * 70000) %>%
++ summarise(mean.rate = mean(Rate, na.rm = TRUE))
+Error: Problem with `summarise()` column `mean.rate`.
+ℹ `mean.rate = mean(Rate, na.rm = TRUE)`.
